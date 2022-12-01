@@ -3,8 +3,7 @@
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
- (function() {
-
+(function () {
   let currentButton;
 
   function handlePlay(event) {
@@ -16,35 +15,59 @@
   }
 
   function handleSave() {
-    document.body.setAttribute('mode', 'edit');
+    document.body.setAttribute("mode", "edit");
     save(currentButton);
   }
 
   function enableEditMode() {
-    document.body.setAttribute('mode', 'edit');
-    document.querySelectorAll('.button').forEach(btn => {
-      btn.removeEventListener('click', handlePlay);
-      btn.addEventListener('click', enableBlocklyMode);
+    document.body.setAttribute("mode", "edit");
+    document.querySelectorAll(".button").forEach((btn) => {
+      btn.removeEventListener("click", handlePlay);
+      btn.addEventListener("click", enableBlocklyMode);
     });
   }
 
   function enableMakerMode() {
-    document.body.setAttribute('mode', 'maker');
-    document.querySelectorAll('.button').forEach(btn => {
-      btn.addEventListener('click', handlePlay);
-      btn.removeEventListener('click', enableBlocklyMode);
+    document.body.setAttribute("mode", "maker");
+    document.querySelectorAll(".button").forEach((btn) => {
+      btn.addEventListener("click", handlePlay);
+      btn.removeEventListener("click", enableBlocklyMode);
     });
   }
 
   function enableBlocklyMode(e) {
-    document.body.setAttribute('mode', 'blockly');
+    document.body.setAttribute("mode", "blockly");
     currentButton = e.target;
   }
 
-  document.querySelector('#edit').addEventListener('click', enableEditMode);
-  document.querySelector('#done').addEventListener('click', enableMakerMode);
-  document.querySelector('#save').addEventListener('click', handleSave);
+  document.querySelector("#edit").addEventListener("click", enableEditMode);
+  document.querySelector("#done").addEventListener("click", enableMakerMode);
+  document.querySelector("#save").addEventListener("click", handleSave);
 
   enableMakerMode();
 
+  const toolbox = {
+    kind: "flyoutToolbox",
+    contents: [
+      {
+        kind: "block",
+        type: "controls_repeat_ext",
+        inputs: {
+          TIMES: {
+            shadow: {
+              type: "math_number",
+              fields: {
+                NUM: 5,
+              },
+            },
+          },
+        },
+      },
+    ],
+  };
+
+  Blockly.inject("blocklyDiv", {
+    toolbox: toolbox,
+    scrollbars: false,
+  });
 })();
