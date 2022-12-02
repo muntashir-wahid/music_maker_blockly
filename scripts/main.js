@@ -63,6 +63,10 @@
           },
         },
       },
+      {
+        kind: "block",
+        type: "play_sound",
+      },
     ],
   };
 
