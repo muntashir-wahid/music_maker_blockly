@@ -11,7 +11,9 @@
   }
 
   function save(button) {
-    // Add code for saving the behavior of a button.
+    button.blocklySave = Blockly.serialization.workspaces.save(
+      Blockly.common.getMainWorkspace()
+    );
   }
 
   function handleSave() {
@@ -35,9 +37,17 @@
     });
   }
 
+  function loadWorkspace(button) {
+    const workspace = Blockly.common.getMainWorkspace();
+    if (button.blocklySave) {
+      Blockly.serialization.workspaces.load(button.blocklySave, workspace);
+    }
+  }
+
   function enableBlocklyMode(e) {
     document.body.setAttribute("mode", "blockly");
     currentButton = e.target;
+    loadWorkspace(currentButton);
   }
 
   document.querySelector("#edit").addEventListener("click", enableEditMode);
