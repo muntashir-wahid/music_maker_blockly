@@ -67,11 +67,28 @@
   enableMakerMode();
 
   const toolbox = {
-    kind: "flyoutToolbox",
+    kind: "categoryToolbox",
     contents: [
       {
-        kind: "block",
-        type: "controls_repeat_ext",
+        kind: "category",
+        name: "Loop",
+        colour: 240,
+        contents: [
+          {
+            kind: "block",
+            type: "controls_repeat_ext",
+            inputs: {
+              TIMES: {
+                shadow: {
+                  type: "math_number",
+                  fields: {
+                    NUM: 5,
+                  },
+                },
+              },
+            },
+          },
+        ],
         inputs: {
           TIMES: {
             shadow: {
@@ -84,8 +101,68 @@
         },
       },
       {
-        kind: "block",
-        type: "play_sound",
+        kind: "category",
+        name: "Conditional",
+        colour: 60,
+        contents: [
+          {
+            kind: "block",
+            type: "controls_if",
+          },
+        ],
+      },
+      {
+        kind: "category",
+        name: "Compare",
+        colour: 280,
+        contents: [
+          {
+            kind: "block",
+            type: "logic_compare",
+          },
+          {
+            kind: "block",
+            type: "logic_operation",
+          },
+        ],
+      },
+      {
+        kind: "category",
+        name: "Operators",
+        colour: 120,
+        contents: [
+          {
+            kind: "block",
+            type: "math_arithmetic",
+          },
+        ],
+      },
+      {
+        kind: "category",
+        name: "Variables",
+        colour: 160,
+        contents: [
+          {
+            kind: "block",
+            type: "math_number",
+          },
+
+          {
+            kind: "block",
+            type: "logic_boolean",
+          },
+        ],
+      },
+      {
+        kind: "category",
+        name: "Play music",
+        colour: 360,
+        contents: [
+          {
+            kind: "block",
+            type: "play_sound",
+          },
+        ],
       },
     ],
   };
